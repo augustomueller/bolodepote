@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import DemonstrativoResultado from '../components/DemonstrativoResultado.vue'
-import KpiCard from '../components/KpiCard.vue'
-import PontoEquilibrioCard from '../components/PontoEquilibrioCard.vue'
+import DemonstrativoResultado from '../components/dashboard/DemonstrativoResultado.vue'
+import KpiCard from '../components/comum/KpiCard.vue'
+import PontoEquilibrioCard from '../components/dashboard/PontoEquilibrioCard.vue'
 import { usePeriodoStore } from '../stores/periodo'
 import { useRelatorioStore } from '../stores/relatorio'
 import { formatBRL, formatNumero } from '../utils/format'

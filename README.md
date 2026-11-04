@@ -4,10 +4,34 @@ Sistema para a Maria registrar vendas, cadastrar produtos, lançar despesas fixa
 e acompanhar o **lucro líquido** e o **ponto de equilíbrio** do mês.
 
 ```
-database/schema.sql   Modelagem SQL (Produtos, DespesasFixas, Vendas)
-backend/              API REST Node.js + TypeScript (Express) — regras de negócio
-backend/db.json       Banco json-server (mesmas 3 tabelas como coleções)
-bolodepote/           Frontend Vue 3 + Vite + TypeScript + Pinia
+database/
+  schema.sql            Modelagem SQL (Produtos, DespesasFixas, Vendas)
+
+backend/                API REST Node.js + TypeScript (Express) — regras de negócio
+  data/
+    db.json             Banco json-server (mesmas 3 tabelas como coleções)
+    db.seed.json        Dados iniciais (usados pelo npm run db:reset)
+  src/
+    server.ts           Ponto de entrada da API
+    config.ts           Variáveis de ambiente
+    routes/             Uma rota por recurso (produtos, despesas, vendas, relatórios)
+    services/           Regras de negócio (cálculos financeiros)
+    db/                 Acesso ao json-server
+    middleware/         Tratamento de erros
+
+bolodepote/             Frontend Vue 3 + Vite + TypeScript + Pinia
+  src/
+    main.ts, App.vue    Entrada e layout (cabeçalho + menu)
+    router/             Rotas das páginas
+    views/              Uma página por rota (Dashboard, Vendas, Produtos, Despesas)
+    components/
+      comum/            Usados em várias páginas (KpiCard, MonthPicker)
+      dashboard/        Só do Dashboard
+      vendas/           Só da página de Vendas
+    stores/             Estado global (Pinia)
+    api/                Cliente HTTP da API
+    utils/              Formatação de moeda, datas e meses
+    types.ts            Tipos compartilhados
 ```
 
 Arquitetura: `Vue (5173) → /api proxy → API Express (3333) → json-server (3001)`.

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePeriodoStore } from '../stores/periodo'
+import { usePeriodoStore } from '../../stores/periodo'
 
 const periodo = usePeriodoStore()
 </script>

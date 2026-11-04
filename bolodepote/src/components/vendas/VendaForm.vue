@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
-import { mensagemErro } from '../api'
-import { useProdutosStore } from '../stores/produtos'
-import { useVendasStore } from '../stores/vendas'
-import type { Venda } from '../types'
-import { formatBRL, hojeISO } from '../utils/format'
+import { mensagemErro } from '../../api'
+import { useProdutosStore } from '../../stores/produtos'
+import { useVendasStore } from '../../stores/vendas'
+import type { Venda } from '../../types'
+import { formatBRL, hojeISO } from '../../utils/format'
 
 const emit = defineEmits<{ registrada: [venda: Venda] }>()
 

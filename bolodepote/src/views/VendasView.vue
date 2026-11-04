@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { mensagemErro } from '../api'
-import VendaForm from '../components/VendaForm.vue'
-import VendasTable from '../components/VendasTable.vue'
+import VendaForm from '../components/vendas/VendaForm.vue'
+import VendasTable from '../components/vendas/VendasTable.vue'
 import { usePeriodoStore } from '../stores/periodo'
 import { useProdutosStore } from '../stores/produtos'
 import { useVendasStore } from '../stores/vendas'

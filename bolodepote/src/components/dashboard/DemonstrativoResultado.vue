@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { RelatorioMensal } from '../types'
-import { formatBRL } from '../utils/format'
+import type { RelatorioMensal } from '../../types'
+import { formatBRL } from '../../utils/format'
 
 defineProps<{ relatorio: RelatorioMensal }>()
 </script>

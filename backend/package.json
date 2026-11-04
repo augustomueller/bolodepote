@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "db": "json-server --watch db.json --port 3001",
+    "db": "json-server --watch data/db.json --port 3001",
     "api": "tsx watch src/server.ts",
     "dev": "concurrently -n db,api -c magenta,cyan \"npm:db\" \"npm:api\"",
     "build": "tsc",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
-    "db:reset": "node -e \"require('fs').copyFileSync('db.seed.json','db.json')\""
+    "db:reset": "node -e \"require('fs').copyFileSync('data/db.seed.json','data/db.json')\""
   },
   "dependencies": {
     "cors": "^2.8.6",

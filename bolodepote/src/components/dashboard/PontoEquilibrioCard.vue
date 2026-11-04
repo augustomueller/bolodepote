@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { RelatorioMensal } from '../types'
-import { formatBRL, formatNumero } from '../utils/format'
+import type { RelatorioMensal } from '../../types'
+import { formatBRL, formatNumero } from '../../utils/format'
 
 const props = defineProps<{ relatorio: RelatorioMensal }>()
 

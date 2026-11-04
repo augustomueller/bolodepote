@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Venda } from '../types'
-import { formatBRL, formatData, formatNumero } from '../utils/format'
+import type { Venda } from '../../types'
+import { formatBRL, formatData, formatNumero } from '../../utils/format'
 
 defineProps<{
   vendas: Venda[]
