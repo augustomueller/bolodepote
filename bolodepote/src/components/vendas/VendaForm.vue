@@ -20,7 +20,7 @@ const enviando = ref(false)
 const erro = ref<string | null>(null)
 const sucesso = ref<string | null>(null)
 
-// Pré-seleciona o produto quando só existe um (hoje: o Cupcake)
+
 watch(
   () => produtos.ativos,
   (ativos) => {
@@ -32,7 +32,7 @@ watch(
 const produto = computed(() => produtos.ativos.find((p) => p.id === form.produtoId))
 const quantidadeValida = computed(() => Number.isInteger(form.quantidade) && form.quantidade > 0)
 
-// Prévia apenas informativa: o valor oficial é calculado pela API
+
 const previa = computed(() => {
   if (!produto.value || !quantidadeValida.value) return null
   const cents = (v: number) => Math.round(v * 100)

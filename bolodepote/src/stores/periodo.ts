@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { deslocarMes, formatMes, mesAtual } from '../utils/format'
 
-/** Mês selecionado, compartilhado entre Dashboard, Vendas e Despesas. */
+
 export const usePeriodoStore = defineStore('periodo', () => {
   const mes = ref(mesAtual())
   const rotulo = computed(() => formatMes(mes.value))

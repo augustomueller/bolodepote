@@ -12,7 +12,7 @@ export function formatData(iso: string): string {
 
 const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
 
-/** 2026-11 → novembro de 2026 */
+
 export function formatMes(mes: string): string {
   const [a, m] = mes.split('-')
   return `${MESES[Number(m) - 1]} de ${a}`

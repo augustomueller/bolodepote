@@ -6,13 +6,6 @@
       "precoVenda": 8,
       "custoVariavel": 4.5,
       "ativo": true
-    },
-    {
-      "nome": "Daniel",
-      "precoVenda": 500,
-      "custoVariavel": 350,
-      "ativo": true,
-      "id": 2
     }
   ],
   "despesasFixas": [
@@ -37,15 +30,6 @@
   ],
   "vendas": [
     {
-      "data": "2026-11-04",
-      "produtoId": 1,
-      "quantidade": 57,
-      "precoUnitario": 8,
-      "custoUnitario": 4.5,
-      "valorTotal": 456,
-      "id": 1
-    },
-    {
       "data": "2026-12-04",
       "produtoId": 1,
       "quantidade": 10,
@@ -53,24 +37,6 @@
       "custoUnitario": 4.5,
       "valorTotal": 80,
       "id": 2
-    },
-    {
-      "data": "2026-11-04",
-      "produtoId": 2,
-      "quantidade": 1,
-      "precoUnitario": 500,
-      "custoUnitario": 350,
-      "valorTotal": 500,
-      "id": 3
-    },
-    {
-      "data": "2026-11-04",
-      "produtoId": 2,
-      "quantidade": 10,
-      "precoUnitario": 500,
-      "custoUnitario": 350,
-      "valorTotal": 5000,
-      "id": 4
     }
   ]
 }
