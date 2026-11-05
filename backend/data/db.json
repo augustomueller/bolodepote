@@ -1,0 +1,42 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Cupcake",
+      "precoVenda": 8,
+      "custoVariavel": 4.5,
+      "ativo": true
+    }
+  ],
+  "despesasFixas": [
+    {
+      "id": 1,
+      "nome": "Internet",
+      "valorMensal": 120,
+      "dataReferencia": "2026-11-10"
+    },
+    {
+      "id": 2,
+      "nome": "Energia Elétrica",
+      "valorMensal": 230,
+      "dataReferencia": "2026-11-15"
+    },
+    {
+      "id": 3,
+      "nome": "Água",
+      "valorMensal": 90,
+      "dataReferencia": "2026-11-20"
+    }
+  ],
+  "vendas": [
+    {
+      "data": "2026-12-04",
+      "produtoId": 1,
+      "quantidade": 10,
+      "precoUnitario": 8,
+      "custoUnitario": 4.5,
+      "valorTotal": 80,
+      "id": 2
+    }
+  ]
+}
