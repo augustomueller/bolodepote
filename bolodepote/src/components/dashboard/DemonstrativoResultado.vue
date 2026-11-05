@@ -38,8 +38,3 @@ defineProps<{ relatorio: RelatorioMensal }>()
     </table>
   </section>
 </template>
-
-<style scoped>
-.subtotal td { font-weight: 600; background: var(--surface-2); }
-tfoot td { font-size: 1.05rem; }
-</style>

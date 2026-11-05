@@ -110,19 +110,3 @@ async function enviar() {
     <p v-if="sucesso" class="alert alert-ok" role="status">{{ sucesso }}</p>
   </form>
 </template>
-
-<style scoped>
-.venda-form { display: flex; flex-direction: column; gap: 16px; }
-.venda-form h2 { margin: 0; }
-.campos { display: grid; grid-template-columns: 160px 1fr 120px; gap: 12px; }
-.rodape { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.previa { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-height: 32px; }
-.previa strong { font-size: 1.4rem; }
-.alert { margin: 0; }
-
-@media (max-width: 640px) {
-  .campos { grid-template-columns: 1fr 1fr; }
-  .produto { grid-column: 1 / -1; order: -1; }
-  .rodape .btn { width: 100%; }
-}
-</style>

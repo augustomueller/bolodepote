@@ -106,12 +106,3 @@ async function remover(d: DespesaFixa) {
     </section>
   </div>
 </template>
-
-<style scoped>
-form { display: flex; flex-direction: column; gap: 16px; }
-form h2 { margin: 0; }
-.campos { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; }
-.acoes { display: flex; justify-content: flex-end; gap: 8px; }
-.alert { margin: 0; }
-@media (max-width: 640px) { .campos { grid-template-columns: 1fr 1fr; } .campos > :first-child { grid-column: 1 / -1; } }
-</style>

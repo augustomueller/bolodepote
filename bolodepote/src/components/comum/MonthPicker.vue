@@ -12,9 +12,3 @@ const periodo = usePeriodoStore()
     <button v-if="!periodo.ehMesAtual" class="btn btn-link small" @click="periodo.irParaAtual">Hoje</button>
   </div>
 </template>
-
-<style scoped>
-.month-picker { display: flex; align-items: center; gap: 6px; }
-.nav { padding: 0; width: 36px; min-height: 36px; font-size: 1.2rem; line-height: 1; }
-.label { min-width: 150px; text-align: center; font-weight: 600; text-transform: capitalize; }
-</style>

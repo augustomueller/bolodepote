@@ -66,7 +66,3 @@ function confirmarRemocao(v: Venda) {
     </div>
   </section>
 </template>
-
-<style scoped>
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-</style>

@@ -75,17 +75,3 @@ const lucroPositivo = computed(() => (r.value?.lucroLiquido ?? 0) >= 0)
     </template>
   </div>
 </template>
-
-<style scoped>
-.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; transition: opacity 0.2s; }
-.kpis.atualizando { opacity: 0.6; }
-.duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-
-@media (max-width: 900px) {
-  .kpis { grid-template-columns: repeat(2, 1fr); }
-  .duas-colunas { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .kpis { grid-template-columns: 1fr; }
-}
-</style>

@@ -117,17 +117,3 @@ async function remover(p: Produto) {
     </section>
   </div>
 </template>
-
-<style scoped>
-form { display: flex; flex-direction: column; gap: 16px; }
-form h2 { margin: 0; }
-.campos { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 12px; }
-.label-fake { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-output { min-height: 40px; display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 1.1rem; }
-.acoes { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.espaco { flex: 1; }
-.check { display: flex; align-items: center; gap: 8px; }
-.check input { width: auto; min-height: 0; }
-.alert { margin: 0; }
-@media (max-width: 720px) { .campos { grid-template-columns: 1fr 1fr; } .campos > :first-child { grid-column: 1 / -1; } }
-</style>

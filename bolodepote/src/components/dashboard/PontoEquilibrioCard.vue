@@ -32,16 +32,9 @@ const nomeUnidade = computed(() =>
         <template v-if="pe.faturamento !== null"> · faturamento de {{ formatBRL(pe.faturamento) }}</template>)
       </p>
 
-      <div
-        class="progress"
-        role="progressbar"
-        :aria-valuenow="percentual"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :aria-label="`${percentual}% do ponto de equilíbrio`"
-      >
-        <div class="bar" :class="{ ok: atingido }" :style="{ width: `${percentual}%` }" />
-      </div>
+      <progress :value="percentual" max="100" :aria-label="`${percentual}% do ponto de equilíbrio`">
+        {{ percentual }}%
+      </progress>
 
       <p class="status" :class="atingido ? 'positivo' : ''">
         <template v-if="atingido">
@@ -64,13 +57,3 @@ const nomeUnidade = computed(() =>
     </template>
   </section>
 </template>
-
-<style scoped>
-.meta { margin: 0; font-size: 1.1rem; }
-.meta strong { font-size: 2rem; color: var(--brand); }
-.progress { margin: 16px 0 8px; height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
-.bar { height: 100%; background: var(--brand); border-radius: 999px; transition: width 0.4s ease; }
-.bar.ok { background: var(--positive); }
-.status { margin: 0 0 8px; font-size: 0.92rem; }
-ul { margin: 8px 0 0; padding-left: 20px; }
-</style>

@@ -10,12 +10,6 @@
   ],
   "despesasFixas": [
     {
-      "id": 1,
-      "nome": "Internet",
-      "valorMensal": 120,
-      "dataReferencia": "2026-11-10"
-    },
-    {
       "id": 2,
       "nome": "Energia Elétrica",
       "valorMensal": 230,
@@ -28,16 +22,10 @@
       "dataReferencia": "2026-11-20"
     },
     {
-      "nome": "Aluguel",
-      "valorMensal": 1000,
+      "nome": "Luz",
+      "valorMensal": 120,
       "dataReferencia": "2026-11-10",
       "id": 4
-    },
-    {
-      "nome": "Rancho",
-      "valorMensal": 200,
-      "dataReferencia": "2026-11-10",
-      "id": 5
     }
   ],
   "vendas": [
@@ -49,24 +37,6 @@
       "custoUnitario": 4.5,
       "valorTotal": 80,
       "id": 2
-    },
-    {
-      "data": "2026-11-04",
-      "produtoId": 1,
-      "quantidade": 126,
-      "precoUnitario": 8,
-      "custoUnitario": 4.5,
-      "valorTotal": 1008,
-      "id": 3
-    },
-    {
-      "data": "2026-11-04",
-      "produtoId": 1,
-      "quantidade": 343,
-      "precoUnitario": 8,
-      "custoUnitario": 4.5,
-      "valorTotal": 2744,
-      "id": 4
     }
   ]
 }
