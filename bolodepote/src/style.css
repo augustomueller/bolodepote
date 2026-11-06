@@ -65,8 +65,27 @@ th { font-size: 0.85rem; color: #555; }
 .negativo { color: #c62828; }
 .empty { color: #777; text-align: center; padding: 16px; }
 .badge { font-size: 0.75rem; padding: 2px 6px; border-radius: 4px; background: #eee; }
-.alert { padding: 8px 12px; border-radius: 4px; margin: 0; }
-.alert-erro { background: #fdecea; color: #c62828; }
-.alert-ok { background: #e8f5e9; color: #2e7d32; }
 progress { width: 100%; margin: 8px 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Campos numéricos sem as setinhas de aumentar/diminuir */
+.sem-setas input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.sem-setas input[type="number"]::-webkit-outer-spin-button,
+.sem-setas input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Modal */
+.modal-fundo {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+}
+.modal {
+  width: 100%; max-width: 420px; padding: 20px;
+  background: #fff; border-radius: 8px; border-top: 4px solid #c2185b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.modal p { margin: 0 0 16px; white-space: pre-line; }
+.modal-erro, .modal-perigo { border-top-color: #c62828; }
+.modal-aviso { border-top-color: #ef6c00; }
+.modal-sucesso { border-top-color: #2e7d32; }
+.btn-perigo { background: #c62828; border-color: #c62828; }

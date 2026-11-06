@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 import { mensagemErro } from '../../api'
+import { avisar, avisarErro } from '../../composables/useModal'
 import { useProdutosStore } from '../../stores/produtos'
 import { useVendasStore } from '../../stores/vendas'
 import type { Venda } from '../../types'
@@ -17,8 +18,6 @@ const form = reactive({
   quantidade: 1,
 })
 const enviando = ref(false)
-const erro = ref<string | null>(null)
-const sucesso = ref<string | null>(null)
 
 
 watch(
@@ -46,19 +45,22 @@ const podeEnviar = computed(() => !!form.data && !!produto.value && quantidadeVa
 async function enviar() {
   if (!podeEnviar.value) return
   enviando.value = true
-  erro.value = null
-  sucesso.value = null
   try {
+    const nome = produto.value?.nome
     const venda = await vendas.registrar({
       data: form.data,
       produtoId: form.produtoId!,
       quantidade: form.quantidade,
     })
-    sucesso.value = `Venda registrada: ${venda.quantidade} × ${produto.value?.nome} = ${formatBRL(venda.valorTotal)}`
     form.quantidade = 1
     emit('registrada', venda)
+    avisar({
+      titulo: 'Venda registrada',
+      mensagem: `${venda.quantidade} × ${nome} = ${formatBRL(venda.valorTotal)}`,
+      tom: 'sucesso',
+    })
   } catch (e) {
-    erro.value = mensagemErro(e)
+    avisarErro(mensagemErro(e), 'Não foi possível registrar a venda')
   } finally {
     enviando.value = false
   }
@@ -105,8 +107,5 @@ async function enviar() {
         {{ enviando ? 'Salvando…' : 'Registrar venda' }}
       </button>
     </div>
-
-    <p v-if="erro" class="alert alert-erro" role="alert">{{ erro }}</p>
-    <p v-if="sucesso" class="alert alert-ok" role="status">{{ sucesso }}</p>
   </form>
 </template>

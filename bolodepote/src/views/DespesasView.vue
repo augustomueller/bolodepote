@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 import { mensagemErro } from '../api'
+import { avisarErro, confirmar } from '../composables/useModal'
 import { useDespesasStore } from '../stores/despesas'
 import { usePeriodoStore } from '../stores/periodo'
 import type { DespesaFixa } from '../types'
@@ -10,11 +11,11 @@ const periodo = usePeriodoStore()
 const despesas = useDespesasStore()
 
 watch(() => periodo.mes, (mes) => despesas.carregar(mes), { immediate: true })
+watch(() => despesas.erro, (e) => { if (e) avisarErro(e, 'Erro ao carregar despesas') })
 
 const vazio = () => ({ nome: '', valorMensal: 0, dataReferencia: `${periodo.mes}-10` })
 const form = reactive(vazio())
 const editandoId = ref<number | null>(null)
-const erro = ref<string | null>(null)
 const salvando = ref(false)
 
 // Ao trocar de mês, o formulário de nova despesa acompanha
@@ -28,28 +29,32 @@ function editar(d: DespesaFixa) {
 function cancelar() {
   editandoId.value = null
   Object.assign(form, vazio())
-  erro.value = null
 }
 
 async function salvar() {
   salvando.value = true
-  erro.value = null
   try {
     await despesas.salvar({ ...form }, editandoId.value ?? undefined)
     cancelar()
   } catch (e) {
-    erro.value = mensagemErro(e)
+    avisarErro(mensagemErro(e), 'Não foi possível salvar a despesa')
   } finally {
     salvando.value = false
   }
 }
 
 async function remover(d: DespesaFixa) {
-  if (!confirm(`Excluir a despesa "${d.nome}"?`)) return
+  const ok = await confirmar({
+    titulo: 'Excluir despesa',
+    mensagem: `Tem certeza que deseja excluir a despesa "${d.nome}" (${formatBRL(d.valorMensal)})? Essa ação não pode ser desfeita.`,
+    textoConfirmar: 'Excluir',
+  })
+  if (!ok) return
   try {
     await despesas.remover(d.id)
+    if (editandoId.value === d.id) cancelar()
   } catch (e) {
-    erro.value = mensagemErro(e)
+    avisarErro(mensagemErro(e), 'Não foi possível excluir a despesa')
   }
 }
 </script>
@@ -76,7 +81,6 @@ async function remover(d: DespesaFixa) {
         <button v-if="editandoId" type="button" class="btn btn-ghost" @click="cancelar">Cancelar</button>
         <button class="btn" type="submit" :disabled="salvando">{{ editandoId ? 'Salvar' : 'Lançar' }}</button>
       </div>
-      <p v-if="erro || despesas.erro" class="alert alert-erro">{{ erro ?? despesas.erro }}</p>
     </form>
 
     <section class="card">

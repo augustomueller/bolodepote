@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { mensagemErro } from '../api'
 import VendaForm from '../components/vendas/VendaForm.vue'
 import VendasTable from '../components/vendas/VendasTable.vue'
+import { avisarErro } from '../composables/useModal'
 import { usePeriodoStore } from '../stores/periodo'
 import { useProdutosStore } from '../stores/produtos'
 import { useVendasStore } from '../stores/vendas'
@@ -11,10 +12,11 @@ import type { Venda } from '../types'
 const periodo = usePeriodoStore()
 const produtos = useProdutosStore()
 const vendas = useVendasStore()
-const erroRemocao = ref<string | null>(null)
 
 onMounted(() => produtos.carregar())
 watch(() => periodo.mes, (mes) => vendas.carregar(mes), { immediate: true })
+watch(() => produtos.erro, (e) => { if (e) avisarErro(e, 'Erro ao carregar produtos') })
+watch(() => vendas.erro, (e) => { if (e) avisarErro(e, 'Erro ao carregar vendas') })
 
 /** Se a venda foi lançada em outro mês, leva a listagem até ele. */
 function aoRegistrar(v: Venda) {
@@ -23,21 +25,18 @@ function aoRegistrar(v: Venda) {
 }
 
 async function remover(v: Venda) {
-  erroRemocao.value = null
   try {
     await vendas.remover(v.id)
   } catch (e) {
-    erroRemocao.value = mensagemErro(e)
+    avisarErro(mensagemErro(e), 'Não foi possível excluir a venda')
   }
 }
 </script>
 
 <template>
   <div class="grid">
-    <p v-if="produtos.erro" class="alert alert-erro">{{ produtos.erro }}</p>
     <VendaForm @registrada="aoRegistrar" />
 
-    <p v-if="vendas.erro || erroRemocao" class="alert alert-erro">{{ vendas.erro ?? erroRemocao }}</p>
     <VendasTable
       :vendas="vendas.lista"
       :total-faturado="vendas.totalFaturado"

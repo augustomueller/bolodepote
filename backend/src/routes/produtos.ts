@@ -9,17 +9,13 @@ import { idParam } from './params.js'
 const produtos = createRepository<Produto>('produtos')
 const vendas = createRepository<Venda>('vendas')
 
-const produtoSchema = z
-  .object({
-    nome: z.string().trim().min(1, 'Informe o nome').max(100),
-    precoVenda: z.number().positive('Preço deve ser maior que zero'),
-    custoVariavel: z.number().nonnegative('Custo não pode ser negativo'),
-    ativo: z.boolean().default(true),
-  })
-  .refine((p) => p.custoVariavel <= p.precoVenda, {
-    message: 'Custo variável maior que o preço de venda: o produto daria prejuízo',
-    path: ['custoVariavel'],
-  })
+// Custo maior que o preço é permitido (gera prejuízo); o front pede confirmação antes de salvar.
+const produtoSchema = z.object({
+  nome: z.string().trim().min(1, 'Informe o nome').max(100),
+  precoVenda: z.number().positive('Preço deve ser maior que zero'),
+  custoVariavel: z.number().nonnegative('Custo não pode ser negativo'),
+  ativo: z.boolean().default(true),
+})
 
 async function garantirNomeUnico(nome: string, ignorarId?: number) {
   const lista = await produtos.list()
