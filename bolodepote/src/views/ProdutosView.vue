@@ -104,25 +104,27 @@ async function remover(p: Produto) {
       <h2>Produtos</h2>
       <p v-if="!produtos.lista.length" class="empty">Nenhum produto cadastrado.</p>
       <div v-else class="table-wrap">
-        <table>
+        <table class="tabela-responsiva">
           <thead>
             <tr>
               <th>Produto</th>
               <th class="num">Preço</th>
               <th class="num">Custo variável</th>
               <th class="num">Margem bruta</th>
-              <th></th>
+              <th><span class="sr-only">Ações</span></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="p in produtos.lista" :key="p.id">
-              <td>{{ p.nome }} <span v-if="!p.ativo" class="badge">inativo</span></td>
-              <td class="num">{{ formatBRL(p.precoVenda) }}</td>
-              <td class="num muted">{{ formatBRL(p.custoVariavel) }}</td>
-              <td class="num" :class="p.margemBruta >= 0 ? 'positivo' : 'negativo'">{{ formatBRL(p.margemBruta) }}</td>
-              <td class="num">
-                <button class="btn btn-link" @click="editar(p)">Editar</button>
-                <button class="btn btn-danger" @click="remover(p)">Excluir</button>
+              <td class="td-titulo">{{ p.nome }} <span v-if="!p.ativo" class="badge">inativo</span></td>
+              <td class="num" data-label="Preço">{{ formatBRL(p.precoVenda) }}</td>
+              <td class="num muted" data-label="Custo variável">{{ formatBRL(p.custoVariavel) }}</td>
+              <td class="num" data-label="Margem bruta" :class="p.margemBruta >= 0 ? 'positivo' : 'negativo'">{{ formatBRL(p.margemBruta) }}</td>
+              <td class="num td-acoes">
+                <div class="acoes-linha">
+                  <button class="btn btn-link" @click="editar(p)">Editar</button>
+                  <button class="btn btn-danger" @click="remover(p)">Excluir</button>
+                </div>
               </td>
             </tr>
           </tbody>

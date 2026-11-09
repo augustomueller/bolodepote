@@ -61,7 +61,7 @@ async function remover(d: DespesaFixa) {
 
 <template>
   <div class="grid">
-    <form class="card" @submit.prevent="salvar">
+    <form class="card sem-setas" @submit.prevent="salvar">
       <h2>{{ editandoId ? 'Editar despesa' : 'Lançar despesa fixa' }}</h2>
       <div class="campos">
         <div class="field">
@@ -70,7 +70,7 @@ async function remover(d: DespesaFixa) {
         </div>
         <div class="field">
           <label for="d-valor">Valor mensal (R$)</label>
-          <input id="d-valor" v-model.number="form.valorMensal" type="number" min="0" step="0.01" required />
+          <input id="d-valor" v-model.number="form.valorMensal" type="number" inputmode="decimal" min="0" step="0.01" required />
         </div>
         <div class="field">
           <label for="d-data">Vencimento / referência</label>
@@ -87,18 +87,20 @@ async function remover(d: DespesaFixa) {
       <h2>Despesas de {{ periodo.rotulo }}</h2>
       <p v-if="!despesas.lista.length" class="empty">Nenhuma despesa lançada neste mês.</p>
       <div v-else class="table-wrap">
-        <table>
+        <table class="tabela-responsiva">
           <thead>
-            <tr><th>Despesa</th><th>Vencimento</th><th class="num">Valor</th><th></th></tr>
+            <tr><th>Despesa</th><th>Vencimento</th><th class="num">Valor</th><th><span class="sr-only">Ações</span></th></tr>
           </thead>
           <tbody>
             <tr v-for="d in despesas.lista" :key="d.id">
-              <td>{{ d.nome }}</td>
-              <td class="muted">{{ formatData(d.dataReferencia) }}</td>
-              <td class="num">{{ formatBRL(d.valorMensal) }}</td>
-              <td class="num">
-                <button class="btn btn-link" @click="editar(d)">Editar</button>
-                <button class="btn btn-danger" @click="remover(d)">Excluir</button>
+              <td class="td-titulo">{{ d.nome }}</td>
+              <td class="muted" data-label="Vencimento">{{ formatData(d.dataReferencia) }}</td>
+              <td class="num" data-label="Valor">{{ formatBRL(d.valorMensal) }}</td>
+              <td class="num td-acoes">
+                <div class="acoes-linha">
+                  <button class="btn btn-link" @click="editar(d)">Editar</button>
+                  <button class="btn btn-danger" @click="remover(d)">Excluir</button>
+                </div>
               </td>
             </tr>
           </tbody>
