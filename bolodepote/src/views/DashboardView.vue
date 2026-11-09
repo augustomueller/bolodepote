@@ -3,6 +3,7 @@ import { computed, watch } from 'vue'
 import DemonstrativoResultado from '../components/dashboard/DemonstrativoResultado.vue'
 import KpiCard from '../components/comum/KpiCard.vue'
 import PontoEquilibrioCard from '../components/dashboard/PontoEquilibrioCard.vue'
+import { avisarErro } from '../composables/useModal'
 import { usePeriodoStore } from '../stores/periodo'
 import { useRelatorioStore } from '../stores/relatorio'
 import { formatBRL, formatNumero } from '../utils/format'
@@ -11,6 +12,7 @@ const periodo = usePeriodoStore()
 const relatorio = useRelatorioStore()
 
 watch(() => periodo.mes, (mes) => relatorio.carregar(mes), { immediate: true })
+watch(() => relatorio.erro, (e) => { if (e) avisarErro(e, 'Erro ao carregar relatório') })
 
 const r = computed(() => relatorio.dados)
 const lucroPositivo = computed(() => (r.value?.lucroLiquido ?? 0) >= 0)
@@ -18,7 +20,7 @@ const lucroPositivo = computed(() => (r.value?.lucroLiquido ?? 0) >= 0)
 
 <template>
   <div class="grid">
-    <p v-if="relatorio.erro" class="alert alert-erro">{{ relatorio.erro }}</p>
+    <p v-if="relatorio.erro && !r" class="empty">Não foi possível carregar o relatório.</p>
     <p v-else-if="!r" class="empty">Carregando relatório…</p>
 
     <template v-if="r">
@@ -66,7 +68,7 @@ const lucroPositivo = computed(() => (r.value?.lucroLiquido ?? 0) >= 0)
                 <td class="num">{{ formatNumero(p.quantidade) }}</td>
                 <td class="num">{{ formatBRL(p.faturamento) }}</td>
                 <td class="num muted">{{ formatBRL(p.custoVariavel) }}</td>
-                <td class="num positivo">{{ formatBRL(p.faturamento - p.custoVariavel) }}</td>
+                <td class="num" :class="p.faturamento - p.custoVariavel >= 0 ? 'positivo' : 'negativo'">{{ formatBRL(p.faturamento - p.custoVariavel) }}</td>
               </tr>
             </tbody>
           </table>

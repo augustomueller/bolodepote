@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { confirmar } from '../../composables/useModal'
 import type { Venda } from '../../types'
 import { formatBRL, formatData, formatNumero } from '../../utils/format'
 
@@ -11,11 +12,16 @@ defineProps<{
 
 const emit = defineEmits<{ remover: [venda: Venda] }>()
 
-function confirmarRemocao(v: Venda) {
-  if (confirm(`Excluir a venda de ${v.quantidade} × ${v.produtoNome} em ${formatData(v.data)}?`)) {
-    emit('remover', v)
-  }
+async function confirmarRemocao(v: Venda) {
+  const ok = await confirmar({
+    titulo: 'Excluir venda',
+    mensagem: `Tem certeza que deseja excluir a venda de ${v.quantidade} × ${v.produtoNome} (${formatBRL(v.valorTotal)}) em ${formatData(v.data)}? Essa ação não pode ser desfeita.`,
+    textoConfirmar: 'Excluir',
+  })
+  if (ok) emit('remover', v)
 }
+
+const margem = (v: Venda) => (v.precoUnitario - v.custoUnitario) * v.quantidade
 </script>
 
 <template>
@@ -45,7 +51,7 @@ function confirmarRemocao(v: Venda) {
             <td class="num">{{ formatNumero(v.quantidade) }}</td>
             <td class="num muted">{{ formatBRL(v.precoUnitario) }}</td>
             <td class="num"><strong>{{ formatBRL(v.valorTotal) }}</strong></td>
-            <td class="num positivo">{{ formatBRL((v.precoUnitario - v.custoUnitario) * v.quantidade) }}</td>
+            <td class="num" :class="margem(v) >= 0 ? 'positivo' : 'negativo'">{{ formatBRL(margem(v)) }}</td>
             <td class="num">
               <button class="btn btn-danger" :aria-label="`Excluir venda ${v.id}`" @click="confirmarRemocao(v)">
                 Excluir

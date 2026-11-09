@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import AppModal from './components/comum/AppModal.vue'
 import MonthPicker from './components/comum/MonthPicker.vue'
 
 const route = useRoute()
@@ -38,4 +39,6 @@ const links = [
 
     <RouterView />
   </main>
+
+  <AppModal />
 </template>
